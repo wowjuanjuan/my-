@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dir</title>
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <input
+      id="dir"
+      name="dir"
+      type="file"
+      webkitdirectory
+      multiple
+      onchange="uploadDir(this)"
+    />
+  </body>
+  <script>
+    function uploadDir(inputTag) {
+      const files = inputTag.files;
+      function getBase64Image(img) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+        var dataURL = canvas.toDataURL("image/png");
+        return dataURL;
+        // return dataURL.replace("data:image/png;base64,", "");
+      }
+
+      function main() {
+        var img = document.createElement("img");
+        let arr = Object.values(obj);
+        console.log(arr);
+        // arr.forEach((val,index)=>{
+
+        // })
+        // img.src =
+        //   "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3922290090,3177876335&fm=26&gp=0.jpg?v=" +
+        //   Math.random(); //此处自己替换本地图片的地址
+        img.src = "./768_552/1变身夜.png";
+        img.crossOrigin = "anonymous";
+        img.onload = function () {
+          debugger;
+          var data = getBase64Image(img);
+          var img1 = document.createElement("img");
+          img1.src = data;
+          document.body.appendChild(img1);
+          console.log(data);
+        };
+      }
+
+      let start = new Date();
+      let tempArr = [];
+      for (let file of files) {
+        // console.log(file.webkitRelativePath);
+        tempArr.push(file.webkitRelativePath);
+      }
+      console.log(tempArr);
+      //   console.log();
+      //   for (key in obj) {
+      //key 是属性名
+      //     console.log(key);
+      //   }
+      //   let newArr = [];
+      //   var tempArr2 = [];
+      //   let i =0;
+      //   tempArr.forEach((val, index) => {
+      //     tempArr2[i].val=val.slice(5, val.length - 4);
+      //     tempArr2[i].
+      //   });
+      //   tempArr.forEach((val, index) => {
+      //     //遍历原本数据对象
+      //     for (const key in obj) {
+      //       //   console.log(obj[key].NFTName, val.slice(5, val.length - 4));
+      //       if (val.slice(5, val.length - 4) == obj[key].NFTName) {
+      //         console.log("yes");
+      //       }
+      //     }
+      //     // console.log(val.slice(4, val.length));
+      //   });
+
+      let end = new Date();
+
+      let intervals = end.getTime() - start.getTime();
+      console.log("共耗时: " + intervals + "ms");
+    }
+  </script>
+</html>
